@@ -48,6 +48,10 @@
   color: #8CC63F;
 }
 
+.tableArea {
+  margin: 48px 0 0 10px; 
+}
+
 @media screen  and (max-width: 990px) {
   .container {
     margin: 0 50px;

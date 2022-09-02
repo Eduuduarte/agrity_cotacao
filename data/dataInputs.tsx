@@ -1,4 +1,4 @@
-import { SelectionType } from "../types/dataTypes";
+import { SelectionType, titleTable } from "../types/dataTypes";
 
 export const propriedade: Array<SelectionType> = [
     {
@@ -8,5 +8,24 @@ export const propriedade: Array<SelectionType> = [
     {
         id: 2,
         title: "Fazendo Bagotá"
+    }
+]
+
+export const table: Array<titleTable> = [
+    {
+        id: 1,
+        title: "produto"
+    },
+    {
+        id: 2,
+        title: "Embalagem"
+    },
+    {
+        id: 3,
+        title: "Quantidade"
+    },
+    {
+        id: 4,
+        title: "Preço unitário"
     }
 ]

@@ -5,7 +5,8 @@ import Header from '../components/Header';
 import SelectItem from '../components/SelectItem';
 import styles from '../styles/Home.module.css';
 
-import { propriedade } from '../data/dataInputs';
+import { propriedade, table } from '../data/dataInputs';
+import TableItem from '../components/TableItem';
 
 const Home: NextPage = () => {
   return (
@@ -110,6 +111,25 @@ const Home: NextPage = () => {
               </Link>
           </div>
         </form>
+
+        <div className={styles.tableArea}>
+          <TableItem 
+            title='Fertilizantes'
+            valueTitle={table}
+          />
+        </div>
+        <div className={styles.tableArea}>
+          <TableItem 
+            title='Químico'
+            valueTitle={table}
+          />
+        </div>
+        <div className={styles.tableArea}>
+          <TableItem 
+            title='Semente'
+            valueTitle={table}
+          />
+        </div>
 
       </div>
     </div>

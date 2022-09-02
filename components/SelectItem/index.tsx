@@ -13,7 +13,7 @@ const SelectItem = ({labelName, required, value}: Props) => {
             <label className={styles.labelName}>{labelName}<span style={{color: '#FF1928'}}>*</span></label>
             <select className={styles.select} required={required}>
                 {value.map((index, key) => (
-                    <option className={styles.option} value="Assis">{index.title}</option>
+                    <option key={key} className={styles.option} value="Assis">{index.title}</option>
                 ))}
             </select>
         </div>
