@@ -1,0 +1,39 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #000;
+}
+
+.left, .right{
+    display: flex;
+    flex-direction: row;
+}
+
+.menu {
+    height: 14px;
+    width: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 15px;
+}
+
+.menuBottom {
+    height: 2px;
+    background-color: #FFF;
+}
+
+.slug, .name {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.icon {
+    color: #FFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px;
+}
