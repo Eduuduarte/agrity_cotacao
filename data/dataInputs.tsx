@@ -29,3 +29,18 @@ export const table: Array<titleTable> = [
         title: "Preço unitário"
     }
 ]
+
+export const somaCotacao: Array<titleTable> = [
+    {
+        id: 1,
+        title: "Categoria"
+    },
+    {
+        id: 2,
+        title: "Valor Total"
+    },
+    {
+        id: 3,
+        title: "Custo/ha (saca)"
+    }
+]

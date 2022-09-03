@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px;
+    gap: 8px;
+    width: 160px;
+    height: 24px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 24px;
+}

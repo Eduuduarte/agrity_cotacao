@@ -5,8 +5,10 @@ import Header from '../components/Header';
 import SelectItem from '../components/SelectItem';
 import styles from '../styles/Home.module.css';
 
-import { propriedade, table } from '../data/dataInputs';
+import { propriedade, table, somaCotacao } from '../data/dataInputs';
 import TableItem from '../components/TableItem';
+import TableInvest from '../components/TableInvest';
+import Button from '../components/Button';
 
 const Home: NextPage = () => {
   return (
@@ -103,35 +105,59 @@ const Home: NextPage = () => {
               required={true}
               value={propriedade}
             />
-            </div>
-            <div className={styles.solicite}>
-              <p className={styles.textSolicite}>Não encontrou o produto que procura?</p>
-              <Link href={''}>
-                <a className={styles.link}>solicite aqui</a>
-              </Link>
+          </div>
+          <div className={styles.solicite}>
+            <p className={styles.textSolicite}>Não encontrou o produto que procura?</p>
+            <Link href={''}>
+              <a className={styles.link}>solicite aqui</a>
+            </Link>
           </div>
         </form>
 
         <div className={styles.tableArea}>
-          <TableItem 
+          <TableItem
             title='Fertilizantes'
             valueTitle={table}
           />
         </div>
         <div className={styles.tableArea}>
-          <TableItem 
+          <TableItem
             title='Químico'
             valueTitle={table}
           />
         </div>
         <div className={styles.tableArea}>
-          <TableItem 
+          <TableItem
             title='Semente'
             valueTitle={table}
           />
         </div>
-
+        <div className={styles.investimento}>
+          <h3>Investimento</h3>
+          <TableInvest 
+            valueTitle={somaCotacao}
+          />
+          <div className={styles.buttons}>
+            <Button
+              color='#4D4D4D'
+              title='Voltar'
+            />
+            <Button
+              color='#A21DDD'
+              title='Salvar'
+            />
+            <Button
+              color='#FBB03B'
+              title='Financiar'
+            />
+            <Button
+              color='#8CC63F'
+              title='Comprar'
+            />
+          </div>
+        </div>
       </div>
+      {/* Fim do Container */}
     </div>
   )
 }
