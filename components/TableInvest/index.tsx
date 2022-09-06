@@ -1,6 +1,6 @@
 import styles from './style.module.css';
 
-import { titleTable } from "../../types/dataTypes";
+import { titleTable } from "../../interfaces/dataInterfaces";
 
 type Props = {
     valueTitle: Array<titleTable>;
@@ -13,7 +13,7 @@ const TableInvest = ({valueTitle}: Props) => {
                 <thead>
                     <tr >
                         {valueTitle.map((item) => (
-                            <th className={styles.titleTable}>{item.title}</th>
+                            <th key={item.id} className={styles.titleTable}>{item.title}</th>
                         ))}
                     </tr>
                 </thead>

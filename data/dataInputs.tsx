@@ -1,4 +1,4 @@
-import { SelectionType, titleTable } from "../types/dataTypes";
+import { SelectionType, titleTable } from "../interfaces/dataInterfaces";
 
 export const propriedade: Array<SelectionType> = [
     {

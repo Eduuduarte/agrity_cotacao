@@ -1,5 +1,5 @@
 import styles from './style.module.css';
-import { titleTable } from '../../types/dataTypes'
+import { titleTable } from '../../interfaces/dataInterfaces'
 
 type Props = {
     title: string;
