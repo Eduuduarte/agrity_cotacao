@@ -12,7 +12,7 @@
     margin: 0 10px 12px 10px;
 }
 
-.select{
+.select {
     padding: 8px 4px;
     background-color: #4C4C4D;
     color: #FFFFFF;
@@ -24,4 +24,27 @@
     font-size: 14px;
     font-weight: 400;
     line-height: 16px;
+}
+
+.input {
+    padding: 4px 8px;
+    background-color: #888888;
+    margin: 0px 10px 0 10px;
+    border-radius: 4px;
+    color: #FFF;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.info {
+    padding: 4px 8px;
+    background-color: transparent;
+    margin: 0px 10px 0 10px;
+    border-radius: 4px;
+    color: #FFF;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    border: 0;
 }

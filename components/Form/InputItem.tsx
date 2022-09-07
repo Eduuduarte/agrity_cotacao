@@ -6,14 +6,16 @@ import { useField } from '@unform/core';
 
 type Props = {
     required?: boolean;
-    value: Array<SelectionType>;
     name: string;
+    type: string;
     labelName: string;
+    info?: boolean;
+    value?: string;
 }
 
-export const SelectItem = ({required, value, name, labelName}: Props) => {
+export const InputItem = ({required, name, type, labelName, info, value}: Props) => {
 
-    const inputRef = useRef<HTMLSelectElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const { fieldName, defaultValue, registerField, error } = useField(name);
 
@@ -36,12 +38,8 @@ export const SelectItem = ({required, value, name, labelName}: Props) => {
 
     return (
         <div className={styles.container}>
-            <label className={styles.labelName}>{name}<span style={{color: '#FF1928'}}>*</span></label>
-            <select className={styles.select} id={fieldName} ref={inputRef}>
-                {value.map((index, key) => (
-                    <option key={key} className={styles.option} value={index.title}>{index.title}</option>
-                ))}
-            </select>
+            <label className={styles.labelName}>{labelName}<span style={{color: '#FF1928'}}>*</span></label>
+            <input ref={inputRef} id={fieldName} className={info ? styles.info : styles.input} type={type} name={name} readOnly={info ? true : false} value={value}  />
         </div>
     )
 }

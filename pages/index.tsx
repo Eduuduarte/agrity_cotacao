@@ -1,11 +1,11 @@
 import type { NextPage } from 'next';
-import {useRef} from 'react';
+import { useRef } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import Header from '../components/Header';
 import styles from '../styles/Home.module.css';
-import { SelectItem } from '../components/Form';
-import { propriedade, table, somaCotacao } from '../data/dataInputs';
+import { SelectItem, InputItem } from '../components/Form';
+import { propriedade, table, somaCotacao, cultura, moeda, formaDePagamento, insumo, catInsumo, produto } from '../data/dataInputs';
 import TableItem from '../components/TableItem';
 import TableInvest from '../components/TableInvest';
 import Button from '../components/Button';
@@ -34,17 +34,94 @@ const Home: NextPage = () => {
           {/* Area sobre de informações */}
           <div className={styles.area}>
             <SelectItem
-              labelName='Propriedade'
               value={propriedade}
               name="propriedade"
+              labelName='Propriedade'
+            />
+            <SelectItem
+              value={cultura}
+              name="cultura"
+              labelName='Cultura'
+            />
+            <SelectItem
+              value={moeda}
+              name="moeda"
+              labelName='Moeda'
+            />
+            <SelectItem
+              value={formaDePagamento}
+              name="forma de pagamento"
+              labelName='Forma de pagamento'
+            />
+            <InputItem
+              name='area'
+              type='text'
+              labelName='Área (ha)'
+            />
+            <InputItem
+              name='precoGrao'
+              type='number'
+              labelName='Preço do grão'
+            />
+            <InputItem
+              name='retirada'
+              type='date'
+              labelName='Retirada'
+            />
+            <InputItem
+              name='pagamento'
+              type='date'
+              labelName='Pagamento'
             />
           </div>
           <h3 className={styles.subTitle}>Produtos</h3>
           {/* Area sobre os produtos */}
           <div className={styles.area}>
-
+            <SelectItem
+              value={insumo}
+              name="insumo"
+              labelName='Insumo'
+            />
+            <SelectItem
+              value={catInsumo}
+              name="catInsumo"
+              labelName='Categoria do insumo'
+            />
+            <SelectItem
+              value={produto}
+              name="produto"
+              labelName='Produto'
+            />
+            <InputItem
+              name='ativo'
+              type='text'
+              labelName='Ativo'
+              info={true}
+              value="300 kg de super simples / 300kg de cloreto potassio"
+            />
+            <InputItem
+              name='dose'
+              type='number'
+              labelName='Dose (kg/ha)'
+            />
+            <InputItem
+              name='custo'
+              type='text'
+              labelName='Custo (kg/ha)'
+              info={true}
+              value="R$ 2.250,00"
+            />
+            <InputItem
+              name='quantidade'
+              type='number'
+              labelName='Quantidade'
+            />
+            <Button
+              color='#8CC63F'
+              title='Adicionar'
+              type='submit'
+            />
           </div>
-          <button type='submit'>Enviar</button>
         </Form>
         <div className={styles.solicite}>
           <p className={styles.textSolicite}>Não encontrou o produto que procura?</p>
