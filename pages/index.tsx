@@ -1,24 +1,63 @@
 import type { NextPage } from 'next';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
-import Header from '../components/Header';
+import { getCookie, hasCookie, setCookie } from 'cookies-next';
+
 import styles from '../styles/Home.module.css';
+
+import Header from '../components/Header';
 import { SelectItem, InputItem } from '../components/Form';
 import { propriedade, table, somaCotacao, cultura, moeda, formaDePagamento, insumo, catInsumo, produto } from '../data/dataInputs';
 import TableItem from '../components/TableItem';
 import TableInvest from '../components/TableInvest';
 import Button from '../components/Button';
+
 import { formData } from '../interfaces/dataInterfaces'
+import { Product } from '../types/DataTypes';
 
 import { Form } from '@unform/web';
 import { SubmitHandler } from '@unform/core';
 
 const Home: NextPage = () => {
   const formRef = useRef(null);
+  const [dataSave, setDataSave] = useState<Product[]>([]);  
 
-  const handleSubmit: SubmitHandler<formData> = (data) => {
-    console.log(data);
+  let productSave: Product[] = [];
+
+  if(hasCookie('productSave')) {
+    const productCookie = getCookie('productSave');
+    const productJson: Product[] = JSON.parse(productCookie as string);
+    for(let i in productJson){
+      productSave.push(productJson[i]);
+    }
+  }
+
+  const handleSubmit: SubmitHandler<Product> = (data) => {
+
+    // Verificando se já existe productSave no cookie
+    if(hasCookie('productSave')) {
+      productSave = [];
+      const productCookie = getCookie('productSave');
+      const productJson: Product[] = JSON.parse(productCookie as string);
+      for(let i in productJson){
+        productSave.push(productJson[i]);
+      }
+    }
+
+    // Incluindo informações no array
+    const productIndex = productSave.findIndex(item => item.produto === data.produto && item.catInsumo === data.catInsumo && item.propriedade === data.propriedade);
+    if(productIndex > -1) {
+      const soma = parseInt(productSave[productIndex].quantidade.toString()) + parseInt(data.quantidade.toString());
+      productSave[productIndex].quantidade = soma;
+    } else {
+      productSave.push(data)
+    }
+
+    // adicionando informações no cookie
+    setCookie('productSave', JSON.stringify(productSave));
+
+    setDataSave(productSave);
   }
 
   return (
@@ -50,13 +89,14 @@ const Home: NextPage = () => {
             />
             <SelectItem
               value={formaDePagamento}
-              name="forma de pagamento"
+              name="formaPagamento"
               labelName='Forma de pagamento'
             />
             <InputItem
               name='area'
               type='text'
               labelName='Área (ha)'
+              required={true}
             />
             <InputItem
               name='precoGrao'

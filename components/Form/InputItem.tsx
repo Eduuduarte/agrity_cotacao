@@ -39,7 +39,7 @@ export const InputItem = ({required, name, type, labelName, info, value}: Props)
     return (
         <div className={styles.container}>
             <label className={styles.labelName}>{labelName}<span style={{color: '#FF1928'}}>*</span></label>
-            <input ref={inputRef} id={fieldName} className={info ? styles.info : styles.input} type={type} name={name} readOnly={info ? true : false} value={value}  />
+            <input ref={inputRef} id={fieldName} className={info ? styles.info : styles.input} type={type} name={name} readOnly={info ? true : false} value={value}  required={required ? true : false}/>
         </div>
     )
 }
