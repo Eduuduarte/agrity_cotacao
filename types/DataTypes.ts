@@ -1,4 +1,5 @@
 export type Product = {
+    id: number;
     area: string;
     ativo: string;
     catInsumo: string;

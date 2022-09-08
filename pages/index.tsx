@@ -13,15 +13,15 @@ import TableItem from '../components/TableItem';
 import TableInvest from '../components/TableInvest';
 import Button from '../components/Button';
 
-import { formData } from '../interfaces/dataInterfaces'
 import { Product } from '../types/DataTypes';
 
 import { Form } from '@unform/web';
 import { SubmitHandler } from '@unform/core';
+import { useProductContext } from '../context/product/hook';
 
 const Home: NextPage = () => {
   const formRef = useRef(null);
-  const [dataSave, setDataSave] = useState<Product[]>([]);  
+  const { product, setProduct } = useProductContext();
 
   let productSave: Product[] = [];
 
@@ -46,19 +46,25 @@ const Home: NextPage = () => {
     }
 
     // Incluindo informações no array
-    const productIndex = productSave.findIndex(item => item.produto === data.produto && item.catInsumo === data.catInsumo && item.propriedade === data.propriedade);
-    if(productIndex > -1) {
-      const soma = parseInt(productSave[productIndex].quantidade.toString()) + parseInt(data.quantidade.toString());
-      productSave[productIndex].quantidade = soma;
-    } else {
-      productSave.push(data)
-    }
+    //const productIndex = productSave.findIndex(item => item.produto === data.produto && item.catInsumo === data.catInsumo && item.propriedade === data.propriedade);
+    //if(productIndex > -1) {
+     // const soma = parseInt(productSave[productIndex].quantidade.toString()) + parseInt(data.quantidade.toString());
+     // productSave[productIndex].quantidade = soma;
+    //} else {
+      const id = data.id = productSave.length + 1;
+      productSave.push(data);
+      setProduct(productSave);
+    //}
 
     // adicionando informações no cookie
     setCookie('productSave', JSON.stringify(productSave));
 
-    setDataSave(productSave);
-  }
+    console.log(getCookie('productSave'));
+  }  
+
+  useEffect(() => {
+    setProduct(productSave);
+  }, [])
 
   return (
     <div className={styles.main}>
@@ -175,18 +181,21 @@ const Home: NextPage = () => {
           <TableItem
             title='Fertilizantes'
             valueTitle={table}
+            data={product.filter((item) => item.insumo === 'Fertilizantes' )}
           />
         </div>
         <div className={styles.tableArea}>
           <TableItem
             title='Químico'
             valueTitle={table}
+            data={product.filter((item) => item.insumo === 'Químico' )}
           />
         </div>
         <div className={styles.tableArea}>
           <TableItem
             title='Semente'
             valueTitle={table}
+            data={product.filter((item) => item.insumo === 'Semente' )}
           />
         </div>
         <div className={styles.investimento}>
