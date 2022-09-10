@@ -11,9 +11,11 @@ type Props = {
 const TableItem = ({ title, valueTitle, data }: Props) => {
 
     return (
-        <div className={styles.container}>
-            <h3 className={styles.title}>{title}</h3>
-            <table>
+        <div className={data.length >= 1 ? styles.container : styles.hidden}>
+
+            <h3 className={styles.title} >{title}</h3>
+            
+            <table className={styles.tableProduct}>
                 <thead>
                     <tr>
                         {valueTitle.map((item) => (
@@ -21,7 +23,7 @@ const TableItem = ({ title, valueTitle, data }: Props) => {
                         ))}
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className={styles.bodyTable}>
                     {data.map((item, index) => (
                         <tr key={item.id}>
                             <td>{item.produto}</td>
@@ -32,6 +34,7 @@ const TableItem = ({ title, valueTitle, data }: Props) => {
                     ))}
                 </tbody>
             </table>
+            
         </div>
 
     );

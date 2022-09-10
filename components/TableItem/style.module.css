@@ -11,10 +11,18 @@
 }
 
 .tableTitle{
-    height: 43px;
-    padding: 14px 8px;
+    padding: 8px 6px;
     background-color: #4E4E4E;
     color: #FFFFFF;
     border-collapse: collapse;
     border-color: #FFFFFF;
+}
+
+.hidden {
+    display: none;
+}
+
+.bodyTable td{
+    text-align: center;
+    padding: 8px 6px;
 }

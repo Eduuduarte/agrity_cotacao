@@ -16,3 +16,7 @@ export type Product = {
     quantidade: number;
     retirada: string;
 }
+
+export type Id = {
+    id: string
+}

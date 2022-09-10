@@ -1,9 +1,8 @@
 import type { NextPage } from 'next';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
-import { getCookie, hasCookie, setCookie } from 'cookies-next';
-
+import { hasCookie, getCookie, setCookie } from 'cookies-next'
 import styles from '../styles/Home.module.css';
 
 import Header from '../components/Header';
@@ -13,7 +12,7 @@ import TableItem from '../components/TableItem';
 import TableInvest from '../components/TableInvest';
 import Button from '../components/Button';
 
-import { Product } from '../types/DataTypes';
+import { Product, Id } from '../types/DataTypes';
 
 import { Form } from '@unform/web';
 import { SubmitHandler } from '@unform/core';
@@ -22,49 +21,63 @@ import { useProductContext } from '../context/product/hook';
 const Home: NextPage = () => {
   const formRef = useRef(null);
   const { product, setProduct } = useProductContext();
+  let id = 0;
 
   let productSave: Product[] = [];
 
-  if(hasCookie('productSave')) {
-    const productCookie = getCookie('productSave');
-    const productJson: Product[] = JSON.parse(productCookie as string);
-    for(let i in productJson){
-      productSave.push(productJson[i]);
+  if (hasCookie('id')) {
+    const idCookie = getCookie('id');
+    const idJson = JSON.parse(idCookie as string);
+    const idNumber = parseInt(idJson);
+    id = idNumber;
+
+    for (let i = 1; i <= id; i++) {
+      let product = localStorage.getItem(i.toString());
+      const productJson: Product = JSON.parse(product as string);
+      productSave.push(productJson);
     }
   }
 
+  console.log(productSave);
+
   const handleSubmit: SubmitHandler<Product> = (data) => {
 
-    // Verificando se já existe productSave no cookie
-    if(hasCookie('productSave')) {
-      productSave = [];
-      const productCookie = getCookie('productSave');
-      const productJson: Product[] = JSON.parse(productCookie as string);
-      for(let i in productJson){
-        productSave.push(productJson[i]);
+    if (hasCookie('id')) {
+      const idCookie = getCookie('id');
+      const idJson = JSON.parse(idCookie as string);
+      const idNumber = parseInt(idJson);
+      id = idNumber;
+
+
+      for (let i = 1; i <= id; i++) {
+        let productStore = localStorage.getItem(i.toString());
+        const productJson: Product = JSON.parse(productStore as string);
+        productSave.push(productJson);
       }
     }
 
     // Incluindo informações no array
-    //const productIndex = productSave.findIndex(item => item.produto === data.produto && item.catInsumo === data.catInsumo && item.propriedade === data.propriedade);
-    //if(productIndex > -1) {
-     // const soma = parseInt(productSave[productIndex].quantidade.toString()) + parseInt(data.quantidade.toString());
-     // productSave[productIndex].quantidade = soma;
-    //} else {
-      const id = data.id = productSave.length + 1;
+    const productIndex = productSave.findIndex(item => item.produto === data.produto && item.catInsumo === data.catInsumo && item.propriedade === data.propriedade);
+    if (productIndex > -1) {
+      const soma = parseInt(productSave[productIndex].quantidade.toString()) + parseInt(data.quantidade.toString());
+      productSave[productIndex].quantidade = soma;
+      const productId = productSave[productIndex].id;
+      const productChange = JSON.stringify(productSave[productIndex]);
+      localStorage.setItem(productId.toString(), productChange);
+    } else {
+      id = id + 1
+      data.id = id;
+      const productChange = JSON.stringify(data);
+      localStorage.setItem(id.toString(), productChange);
       productSave.push(data);
-      setProduct(productSave);
-    //}
+      setCookie("id", id);
+    }
 
-    // adicionando informações no cookie
-    setCookie('productSave', JSON.stringify(productSave));
-
-    console.log(getCookie('productSave'));
-  }  
+  }
 
   useEffect(() => {
     setProduct(productSave);
-  }, [])
+  }, []);
 
   return (
     <div className={styles.main}>
@@ -181,21 +194,21 @@ const Home: NextPage = () => {
           <TableItem
             title='Fertilizantes'
             valueTitle={table}
-            data={product.filter((item) => item.insumo === 'Fertilizantes' )}
+            data={product.filter((item) => item.insumo === 'Fertilizantes')}
           />
         </div>
         <div className={styles.tableArea}>
           <TableItem
             title='Químico'
             valueTitle={table}
-            data={product.filter((item) => item.insumo === 'Químico' )}
+            data={product.filter((item) => item.insumo === 'Químico')}
           />
         </div>
         <div className={styles.tableArea}>
           <TableItem
             title='Semente'
             valueTitle={table}
-            data={product.filter((item) => item.insumo === 'Semente' )}
+            data={product.filter((item) => item.insumo === 'Semente')}
           />
         </div>
         <div className={styles.investimento}>
