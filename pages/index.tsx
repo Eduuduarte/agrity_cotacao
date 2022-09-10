@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { useEffect, useRef } from 'react';
+import { useEffect, useReducer, useRef } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import { hasCookie, getCookie, setCookie } from 'cookies-next'
@@ -21,43 +21,37 @@ import { useProductContext } from '../context/product/hook';
 const Home: NextPage = () => {
   const formRef = useRef(null);
   const { product, setProduct } = useProductContext();
+  const [reducerValue, forceUpdate] = useReducer(x => x + 1, 0);
   let id = 0;
 
   let productSave: Product[] = [];
 
-  if (hasCookie('id')) {
-    const idCookie = getCookie('id');
-    const idJson = JSON.parse(idCookie as string);
-    const idNumber = parseInt(idJson);
-    id = idNumber;
-
-    for (let i = 1; i <= id; i++) {
-      let product = localStorage.getItem(i.toString());
-      const productJson: Product = JSON.parse(product as string);
-      productSave.push(productJson);
-    }
-  }
-
-  console.log(productSave);
-
-  const handleSubmit: SubmitHandler<Product> = (data) => {
-
+  const handleStore = () => {
     if (hasCookie('id')) {
       const idCookie = getCookie('id');
       const idJson = JSON.parse(idCookie as string);
       const idNumber = parseInt(idJson);
       id = idNumber;
 
-
       for (let i = 1; i <= id; i++) {
-        let productStore = localStorage.getItem(i.toString());
-        const productJson: Product = JSON.parse(productStore as string);
+        let product = localStorage.getItem(i.toString());
+        const productJson: Product = JSON.parse(product as string);
         productSave.push(productJson);
       }
     }
+  }
+
+  handleStore()
+
+
+
+
+  const handleSubmit: SubmitHandler<Product> = async (data) => {
+
+    handleStore()
 
     // Incluindo informações no array
-    const productIndex = productSave.findIndex(item => item.produto === data.produto && item.catInsumo === data.catInsumo && item.propriedade === data.propriedade);
+    const productIndex = productSave.findIndex(item => item.produto === data.produto && item.catInsumo === data.catInsumo && item.propriedade === data.propriedade && item.insumo === data.insumo);
     if (productIndex > -1) {
       const soma = parseInt(productSave[productIndex].quantidade.toString()) + parseInt(data.quantidade.toString());
       productSave[productIndex].quantidade = soma;
@@ -69,15 +63,17 @@ const Home: NextPage = () => {
       data.id = id;
       const productChange = JSON.stringify(data);
       localStorage.setItem(id.toString(), productChange);
-      productSave.push(data);
+      //productSave.push(data);
       setCookie("id", id);
     }
 
+    handleStore()
+    forceUpdate()
   }
 
   useEffect(() => {
     setProduct(productSave);
-  }, []);
+  }, [reducerValue]);
 
   return (
     <div className={styles.main}>
