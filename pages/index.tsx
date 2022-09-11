@@ -161,10 +161,10 @@ const Home: NextPage = () => {
             />
             <InputItem
               name='custo'
-              type='text'
+              type='number'
               labelName='Custo (kg/ha)'
               info={true}
-              value="R$ 2.250,00"
+              value="50"
             />
             <InputItem
               name='quantidade'
@@ -211,6 +211,7 @@ const Home: NextPage = () => {
           <h3>Investimento</h3>
           <TableInvest
             valueTitle={somaCotacao}
+            data={product}
           />
           <div className={styles.buttons}>
             <Button

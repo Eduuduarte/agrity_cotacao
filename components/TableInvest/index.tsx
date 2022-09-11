@@ -1,12 +1,26 @@
 import styles from './style.module.css';
 
 import { titleTable } from "../../interfaces/dataInterfaces";
+import { Product } from '../../types/DataTypes';
+import ValorT from './valorT';
+import Custo from './custo';
 
 type Props = {
     valueTitle: Array<titleTable>;
+    data: Array<Product>;
 }
 
-const TableInvest = ({valueTitle}: Props) => {
+const TableInvest = ({ valueTitle, data }: Props) => {
+
+    let soma = 0;
+    let custo = 0
+    for (let i = 0; i < data.length; i++) {
+        let valor = data[i].dose * data[i].custo * data[i].quantidade;
+        let custoA = data[i].dose * data[i].custo * data[i].quantidade / data[i].area;
+        soma += valor;
+        custo += custoA;
+    }
+
     return (
         <div className={styles.container}>
             <table className={styles.table}>
@@ -20,23 +34,23 @@ const TableInvest = ({valueTitle}: Props) => {
                 <tbody >
                     <tr>
                         <td>Fertilizante</td>
-                        <td>R$ 500.000,00</td>
-                        <td>12,00</td>
+                        <td><ValorT data={data} filter='Fertilizantes' /></td>
+                        <td><Custo data={data} filter='Fertilizantes' /></td>
                     </tr>
                     <tr>
                         <td>Químico</td>
-                        <td>R$ 3.500.000,00</td>
-                        <td>10,00</td>
+                        <td><ValorT data={data} filter='Químico' /></td>
+                        <td><Custo data={data} filter='Químico' /></td>
                     </tr>
                     <tr>
                         <td>Semente</td>
-                        <td>R$ 600.000,00</td>
-                        <td>8,0</td>
+                        <td><ValorT data={data} filter='Semente' /></td>
+                        <td><Custo data={data} filter='Semente' /></td>
                     </tr>
                     <tr>
                         <td>Total</td>
-                        <td>R$ 4.600.000,00</td>
-                        <td>30,00</td>
+                        <td>{soma}</td>
+                        <td>{custo}</td>
                     </tr>
                 </tbody>
             </table>

@@ -1,16 +1,16 @@
 export type Product = {
     id: number;
-    area: string;
+    area: number;
     ativo: string;
     catInsumo: string;
     cultura: string;
-    custo: string;
-    dose: string;
+    custo: number;
+    dose: number;
     formaPagamento: string;
     insumo: string;
     moeda: string;
     pagamento: string;
-    precoGrao: string;
+    precoGrao: number;
     produto: string;
     propriedade: string;
     quantidade: number;
