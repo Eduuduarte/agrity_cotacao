@@ -2,8 +2,9 @@ import styles from './style.module.css';
 
 import { titleTable } from "../../interfaces/dataInterfaces";
 import { Product } from '../../types/DataTypes';
-import ValorT from './valorT';
-import Custo from './custo';
+import { useFormatter } from '../../lib/useFormatter';
+import ValorT from './ValorT';
+import Custo from './Custo';
 
 type Props = {
     valueTitle: Array<titleTable>;
@@ -12,6 +13,9 @@ type Props = {
 
 const TableInvest = ({ valueTitle, data }: Props) => {
 
+    const formatter = useFormatter();
+
+    // Pegar valores para o total
     let soma = 0;
     let custo = 0
     for (let i = 0; i < data.length; i++) {
@@ -49,8 +53,8 @@ const TableInvest = ({ valueTitle, data }: Props) => {
                     </tr>
                     <tr>
                         <td>Total</td>
-                        <td>{soma}</td>
-                        <td>{custo}</td>
+                        <td>{formatter.formtCurrency(soma)}</td>
+                        <td>{formatter.formtNumber(custo)}</td>
                     </tr>
                 </tbody>
             </table>
