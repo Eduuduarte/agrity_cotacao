@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { useEffect, useReducer, useRef } from 'react';
+import { useEffect, useState, useReducer, useRef } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import { hasCookie, getCookie, setCookie } from 'cookies-next'
@@ -17,8 +17,14 @@ import { Product, Id } from '../types/DataTypes';
 import { Form } from '@unform/web';
 import { SubmitHandler } from '@unform/core';
 import { useProductContext } from '../context/product/hook';
+import { Navbar } from '../components/Navbar';
 
 const Home: NextPage = () => {
+
+  const [showNavbar, setShowNavbar] = useState(false);
+
+  const handleShowNavbar = () => setShowNavbar(!showNavbar);
+
   const formRef = useRef(null);
   const { product, setProduct } = useProductContext();
   const [reducerValue, forceUpdate] = useReducer(x => x + 1, 0);
@@ -46,7 +52,7 @@ const Home: NextPage = () => {
 
 
 
-  const handleSubmit: SubmitHandler<Product> = async (data) => {
+  const handleSubmit: SubmitHandler<Product> = async (data, { reset }) => {
 
     handleStore()
 
@@ -67,8 +73,9 @@ const Home: NextPage = () => {
       setCookie("id", id);
     }
 
-    handleStore()
-    forceUpdate()
+    handleStore();
+    reset();
+    forceUpdate();
   }
 
   useEffect(() => {
@@ -80,7 +87,13 @@ const Home: NextPage = () => {
       <Head>
         <title>Agrity - Cotação de insumos</title>
       </Head>
-      <Header />
+
+      {showNavbar && 
+        <Navbar click={handleShowNavbar}/>
+      }
+
+      <Header click={handleShowNavbar} />
+
       <div className={styles.container}>
         <h2 className={styles.title}>Cotação de insumos</h2>
         <Form ref={formRef} onSubmit={handleSubmit}>

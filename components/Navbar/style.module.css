@@ -1,0 +1,56 @@
+.Container{
+    height: 100vh;
+    width: 300px;
+    background-color: #333333;
+    position: fixed;
+    padding: 1rem;
+}
+
+.slug{
+    position: absolute;
+    left: 30%;
+    top: 5%;
+    font-size: 30px;
+}
+
+.close {
+    position: absolute;
+    right: 5%;
+    top: 5%;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    transition-timing-function: ease;
+}
+
+.close:hover {
+    width: 2.2rem;
+    height: 2.2rem;
+}
+
+.area{
+    margin-top: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+}
+
+.item{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem;
+    width: 100%;
+    border-bottom: 1px solid #FFF;
+    cursor: pointer;
+}
+
+.icon{
+    width: 2rem;
+    height: 2rem;
+}
+
+.item P{
+    font-size: 1.5rem;
+}

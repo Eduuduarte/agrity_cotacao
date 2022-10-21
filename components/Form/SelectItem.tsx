@@ -36,7 +36,7 @@ export const SelectItem = ({required, value, name, labelName}: Props) => {
 
     return (
         <div className={styles.container}>
-            <label className={styles.labelName}>{name}<span style={{color: '#FF1928'}}>*</span></label>
+            <label className={styles.labelName}>{labelName}<span style={{color: '#FF1928'}}>*</span></label>
             <select className={styles.select} id={fieldName} ref={inputRef}>
                 {value.map((index, key) => (
                     <option key={key} className={styles.option} value={index.title}>{index.title}</option>

@@ -1,12 +1,16 @@
 import styles from './style.module.css';
 import {BsBell} from 'react-icons/bs';
 
-const Header = () => {
+type Props = {
+    click: () => void;
+}
+
+const Header = ({click}: Props) => {
     return (
         <header>
             <div className={styles.container}>
                 <div className={styles.left}>
-                    <div className={styles.menu}>
+                    <div className={styles.menu} onClick={click}>
                         <div className={styles.menuBottom}></div>
                         <div className={styles.menuBottom}></div>
                         <div className={styles.menuBottom}></div>
