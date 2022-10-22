@@ -23,6 +23,8 @@ const Home: NextPage = () => {
 
   const [showNavbar, setShowNavbar] = useState(false);
 
+  const [dose, setDose] = useState(0);
+
   const handleShowNavbar = () => setShowNavbar(!showNavbar);
 
   const formRef = useRef(null);
@@ -125,21 +127,25 @@ const Home: NextPage = () => {
               type='text'
               labelName='Área (ha)'
               required={true}
+              change={() => null}
             />
             <InputItem
               name='precoGrao'
               type='number'
               labelName='Preço do grão'
+              change={() => null}
             />
             <InputItem
               name='retirada'
               type='date'
               labelName='Retirada'
+              change={() => null}
             />
             <InputItem
               name='pagamento'
               type='date'
               labelName='Pagamento'
+              change={() => null}
             />
           </div>
           <h3 className={styles.subTitle}>Produtos</h3>
@@ -166,23 +172,27 @@ const Home: NextPage = () => {
               labelName='Ativo'
               info={true}
               value="300 kg de super simples / 300kg de cloreto potassio"
+              change={() => null}
             />
             <InputItem
               name='dose'
               type='number'
               labelName='Dose (kg/ha)'
+              change={ newValue => setDose(parseInt(newValue))}
             />
             <InputItem
               name='custo'
               type='number'
               labelName='Custo (kg/ha)'
               info={true}
-              value="50"
+              value={dose.toString()}
+              change={() => null}
             />
             <InputItem
               name='quantidade'
               type='number'
               labelName='Quantidade'
+              change={() => null}
             />
             <Button
               color='#8CC63F'

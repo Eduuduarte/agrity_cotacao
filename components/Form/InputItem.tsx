@@ -11,9 +11,10 @@ type Props = {
     labelName: string;
     info?: boolean;
     value?: string;
+    change: (newValue: string) => void;
 }
 
-export const InputItem = ({required, name, type, labelName, info, value}: Props) => {
+export const InputItem = ({required, name, type, labelName, info, value, change}: Props) => {
 
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -39,7 +40,15 @@ export const InputItem = ({required, name, type, labelName, info, value}: Props)
     return (
         <div className={styles.container}>
             <label className={styles.labelName}>{labelName}<span style={{color: '#FF1928'}}>*</span></label>
-            <input ref={inputRef} id={fieldName} className={info ? styles.info : styles.input} type={type} name={name} readOnly={info ? true : false} value={value}  required={required ? true : false}/>
+            <input
+            onChange={e => change(e.target.value)}
+            ref={inputRef} 
+            id={fieldName} 
+            className={info ? styles.info : styles.input} 
+            type={type} name={name} readOnly={info ? true : false} 
+            value={value}  
+            required={required ? true : false}
+            />
         </div>
     )
 }

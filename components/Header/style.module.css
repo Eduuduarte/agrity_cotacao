@@ -17,6 +17,12 @@
     flex-direction: column;
     justify-content: space-between;
     margin: 15px;
+    cursor: pointer;
+    transition: ease-in;
+}
+
+.menu:hover {
+    transform: scale(1.2, 1.2);
 }
 
 .menuBottom {
