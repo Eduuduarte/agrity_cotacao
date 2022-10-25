@@ -7,7 +7,8 @@ import styles from '../styles/Home.module.css';
 
 import Header from '../components/Header';
 import { SelectItem, InputItem } from '../components/Form';
-import { propriedade, table, somaCotacao, cultura, moeda, formaDePagamento, insumo, catInsumo, produto } from '../data/dataInputs';
+import { propriedade, table, somaCotacao, cultura, moeda, formaDePagamento, insumo, catInsumo } from '../data/dataInputs';
+import { Produtcs } from '../data/data';
 import TableItem from '../components/TableItem';
 import TableInvest from '../components/TableInvest';
 import Button from '../components/Button';
@@ -18,15 +19,35 @@ import { Form } from '@unform/web';
 import { SubmitHandler } from '@unform/core';
 import { useProductContext } from '../context/product/hook';
 import { Navbar } from '../components/Navbar';
+import { SelectItems } from '../components/Form/SelectItems';
 
 const Home: NextPage = () => {
 
+  // Config navbar
   const [showNavbar, setShowNavbar] = useState(false);
-
-  const [dose, setDose] = useState(0);
-
   const handleShowNavbar = () => setShowNavbar(!showNavbar);
 
+  // Valores dos item do form
+  const [dose, setDose] = useState(0);
+  const [insumoSelect, setInsumoSelect] = useState('Fertilizantes');
+  const [productSelect, setProductSelect] = useState('Nitrogenado');
+  const [ativoSelect, setAtivoSelect] = useState('N39');
+
+  const ativoProduct = () => {
+    
+  }
+
+  useEffect(() => {
+    const ativo = Produtcs.filter(item => item.produto === productSelect);
+    setAtivoSelect(ativo[0].ativo);
+  }, [productSelect]);
+
+  useEffect(() => {
+    const insumo = Produtcs.filter(item => item.insumo === insumoSelect);
+    setProductSelect(insumo[0].produto);
+  }, [insumoSelect]);
+
+  // Array para o localStorage
   const formRef = useRef(null);
   const { product, setProduct } = useProductContext();
   const [reducerValue, forceUpdate] = useReducer(x => x + 1, 0);
@@ -50,9 +71,6 @@ const Home: NextPage = () => {
   }
 
   handleStore()
-
-
-
 
   const handleSubmit: SubmitHandler<Product> = async (data, { reset }) => {
 
@@ -90,8 +108,8 @@ const Home: NextPage = () => {
         <title>Agrity - Cotação de insumos</title>
       </Head>
 
-      {showNavbar && 
-        <Navbar click={handleShowNavbar}/>
+      {showNavbar &&
+        <Navbar click={handleShowNavbar} />
       }
 
       <Header click={handleShowNavbar} />
@@ -155,30 +173,32 @@ const Home: NextPage = () => {
               value={insumo}
               name="insumo"
               labelName='Insumo'
+              change={newValue => setInsumoSelect(newValue)}
             />
             <SelectItem
               value={catInsumo}
               name="catInsumo"
               labelName='Categoria do insumo'
             />
-            <SelectItem
-              value={produto}
+            <SelectItems
+              value={Produtcs.filter(item => item.insumo === insumoSelect)}
               name="produto"
               labelName='Produto'
+              change={newValue => setProductSelect(newValue)}
             />
             <InputItem
               name='ativo'
               type='text'
               labelName='Ativo'
               info={true}
-              value="300 kg de super simples / 300kg de cloreto potassio"
+              value={ativoSelect}
               change={() => null}
             />
             <InputItem
               name='dose'
               type='number'
               labelName='Dose (kg/ha)'
-              change={ newValue => setDose(parseInt(newValue))}
+              change={newValue => setDose(parseInt(newValue))}
             />
             <InputItem
               name='custo'

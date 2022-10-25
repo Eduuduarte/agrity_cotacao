@@ -1,18 +1,18 @@
 import styles from './styles.module.css';
-import {SelectionType} from '../../interfaces/dataInterfaces';
+import {data, SelectionType} from '../../interfaces/dataInterfaces';
 
 import {useEffect, useRef} from 'react';
 import { useField } from '@unform/core';
 
 type Props = {
     required?: boolean;
-    value: Array<SelectionType>;
+    value: Array<data>;
     name: string;
     labelName: string;
     change?: (newValue: string) => void;
 }
 
-export const SelectItem = ({required, value, name, labelName, change}: Props) => {
+export const SelectItems = ({required, value, name, labelName, change}: Props) => {
 
     const inputRef = useRef<HTMLSelectElement>(null);
 
@@ -40,7 +40,7 @@ export const SelectItem = ({required, value, name, labelName, change}: Props) =>
             <label className={styles.labelName}>{labelName}<span style={{color: '#FF1928'}}>*</span></label>
             <select className={styles.select} id={fieldName} ref={inputRef} onChange={change ? e => change(e.target.value) : () => null}>
                 {value.map((index, key) => (
-                    <option key={key} className={styles.option} value={index.title}>{index.title}</option>
+                    <option key={key} className={styles.option} value={index.produto}>{index.produto}</option>
                 ))}
             </select>
         </div>
