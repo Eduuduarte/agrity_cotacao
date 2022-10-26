@@ -21,7 +21,7 @@ import { useProductContext } from '../context/product/hook';
 import { Navbar } from '../components/Navbar';
 import { SelectItems } from '../components/Form/SelectItems';
 
-const Home: NextPage = () => {
+const Solicitacao = () => {
 
   // Config navbar
   const [showNavbar, setShowNavbar] = useState(false);
@@ -114,58 +114,9 @@ const Home: NextPage = () => {
 
       <div className={styles.container}>
 
-        <h2 className={styles.title}>Cotação de insumos</h2>
+        <h2 className={styles.title}>Solicitar Produto</h2>
         <Form ref={formRef} onSubmit={handleSubmit}>
 
-          {/* Area sobre de informações */}
-          <h3 className={styles.subTitle}>Informações iniciais</h3>          
-          <div className={styles.area}>
-            <SelectItem
-              value={propriedade}
-              name="propriedade"
-              labelName='Propriedade'
-            />
-            <SelectItem
-              value={cultura}
-              name="cultura"
-              labelName='Cultura'
-            />
-            <SelectItem
-              value={moeda}
-              name="moeda"
-              labelName='Moeda'
-            />
-            <SelectItem
-              value={formaDePagamento}
-              name="formaPagamento"
-              labelName='Forma de pagamento'
-            />
-            <InputItem
-              name='area'
-              type='text'
-              labelName='Área (ha)'
-              required={true}
-              change={() => null}
-            />
-            <InputItem
-              name='precoGrao'
-              type='number'
-              labelName='Preço do grão'
-              change={() => null}
-            />
-            <InputItem
-              name='retirada'
-              type='date'
-              labelName='Retirada'
-              change={() => null}
-            />
-            <InputItem
-              name='pagamento'
-              type='date'
-              labelName='Pagamento'
-              change={() => null}
-            />
-          </div>
 
           {/* Area sobre os produtos */}
           <h3 className={styles.subTitle}>Produtos</h3>
@@ -222,68 +173,10 @@ const Home: NextPage = () => {
             />
           </div>
         </Form>
-
-        {/* Não encontrou o produto? */}
-        <div className={styles.solicite}>
-          <p className={styles.textSolicite}>Não encontrou o produto que procura?</p>
-          <Link href={'/solicitacao'}>
-            <a className={styles.link}>solicite aqui</a>
-          </Link>
-        </div>
-
-        {/* Tabelas dos Produtos adicionados */}
-        <div className={styles.tableArea}>
-          <TableItem
-            title='Fertilizantes'
-            valueTitle={table}
-            data={product.filter((item) => item.insumo === 'Fertilizantes')}
-          />
-        </div>
-        <div className={styles.tableArea}>
-          <TableItem
-            title='Químico'
-            valueTitle={table}
-            data={product.filter((item) => item.insumo === 'Químico')}
-          />
-        </div>
-        <div className={styles.tableArea}>
-          <TableItem
-            title='Semente'
-            valueTitle={table}
-            data={product.filter((item) => item.insumo === 'Semente')}
-          />
-        </div>
-
-        {/* Tabela do investimento */}
-        <div className={styles.investimento}>
-          <h3>Investimento</h3>
-          <TableInvest
-            valueTitle={somaCotacao}
-            data={product}
-          />
-          <div className={styles.buttons}>
-            <Button
-              color='#4D4D4D'
-              title='Voltar'
-            />
-            <Button
-              color='#A21DDD'
-              title='Salvar'
-            />
-            <Button
-              color='#FBB03B'
-              title='Financiar'
-            />
-            <Button
-              color='#8CC63F'
-              title='Comprar'
-            />
-          </div>
-        </div>
       </div>
       {/* Fim do Container */}
     </div>
   )
 }
 
-export default Home
+export default Solicitacao;

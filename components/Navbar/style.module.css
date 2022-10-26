@@ -46,6 +46,10 @@
     cursor: pointer;
 }
 
+.item:hover {
+    border-color: #FFD700;
+}
+
 .icon{
     width: 2rem;
     height: 2rem;

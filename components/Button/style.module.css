@@ -22,3 +22,7 @@
     color: #FFF;
     margin-bottom: 14px;
 }
+
+.button:hover {
+    opacity: 0.8;
+}
