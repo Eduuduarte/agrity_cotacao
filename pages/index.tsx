@@ -31,15 +31,13 @@ const Home: NextPage = () => {
   const [dose, setDose] = useState(0);
   const [insumoSelect, setInsumoSelect] = useState('Fertilizantes');
   const [productSelect, setProductSelect] = useState('Nitrogenado');
+  const [custProduct, setCustProduct] = useState('0');
   const [ativoSelect, setAtivoSelect] = useState('N39');
-
-  const ativoProduct = () => {
-    
-  }
 
   useEffect(() => {
     const ativo = Produtcs.filter(item => item.produto === productSelect);
     setAtivoSelect(ativo[0].ativo);
+    setCustProduct(ativo[0].preco.toString());
   }, [productSelect]);
 
   useEffect(() => {
@@ -205,7 +203,7 @@ const Home: NextPage = () => {
               type='number'
               labelName='Custo (kg/ha)'
               info={true}
-              value={dose.toString()}
+              value={custProduct}
               change={() => null}
             />
             <InputItem

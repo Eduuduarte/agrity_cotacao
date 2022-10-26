@@ -13,7 +13,7 @@ const ValorT = ({data, filter}: Props) => {
     let soma = 0;
     const filterInsumo = data.filter(item => item.insumo === filter);
     for(let i = 0; i < filterInsumo.length; i++){
-        let valor = filterInsumo[i].dose * filterInsumo[i].custo * filterInsumo[i].quantidade;
+        let valor = filterInsumo[i].dose * filterInsumo[i].area * filterInsumo[i].custo * filterInsumo[i].quantidade;
         soma += valor;
     }
     

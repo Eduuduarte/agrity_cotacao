@@ -19,8 +19,8 @@ const TableInvest = ({ valueTitle, data }: Props) => {
     let soma = 0;
     let custo = 0
     for (let i = 0; i < data.length; i++) {
-        let valor = data[i].dose * data[i].custo * data[i].quantidade;
-        let custoA = data[i].dose * data[i].custo * data[i].quantidade / data[i].area;
+        let valor =data[i].dose * data[i].area * data[i].custo * data[i].quantidade;
+        let custoA = data[i].dose * data[i].area * data[i].custo * data[i].quantidade / data[i].area;
         soma += valor;
         custo += custoA;
     }
