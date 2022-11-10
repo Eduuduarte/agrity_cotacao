@@ -1,0 +1,59 @@
+.main{
+  background-color: #333333;
+  height: 100vh;
+  color: #FFFFFF;
+}
+
+.container {
+  margin: 0 190px;
+}
+
+.title{
+  font-size: 21px;
+  line-height: 25px;
+  font-weight: 700;
+  margin: 32px 0 0 10px;
+}
+
+.areaForm{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.subTitle {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 21px;
+  margin: 32px 0px 0 10px;
+}
+
+.area{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+
+@media screen  and (max-width: 990px) {
+  .container {
+    margin: 0 50px;
+  }
+  .area{
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen  and (max-width: 810px) {
+  .container {
+    margin: 0 20px;
+  }
+  .area{
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 50%;
+  }
+}

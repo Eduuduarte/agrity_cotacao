@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+import styles from '../styles/Solicitacao.module.css';
 
 import Header from '../components/Header';
 import { SelectItem, InputItem } from '../components/Form';
@@ -47,7 +47,7 @@ const Solicitacao = () => {
   return (
     <div className={styles.main}>
       <Head>
-        <title>Agrity - Cotação de insumos</title>
+        <title>Agrity - Solicitação</title>
       </Head>
 
       {showNavbar &&
@@ -59,7 +59,7 @@ const Solicitacao = () => {
       <div className={styles.container}>
 
         <h2 className={styles.title}>Solicitar Produto</h2>
-        <Form ref={formRef} onSubmit={handleSubmit}>
+        <Form ref={formRef} onSubmit={handleSubmit} className={styles.areaForm}>
 
 
           {/* Area sobre os produtos */}
@@ -91,11 +91,13 @@ const Solicitacao = () => {
               change={() => null}
             />
           </div>
+
           <Button
               color='#8CC63F'
               title='Adicionar'
               type='submit'
             />
+
         </Form>
       </div>
       {/* Fim do Container */}
